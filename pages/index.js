@@ -18,16 +18,16 @@ export default function Home() {
     e.preventDefault()
     const formData = new FormData()
     formData.append('nombre',data.nombre)
-    try{
+
       axios.post('/api/hello',formData,{ 
         headers: {
           'Content-Type': 'multipart/form-data'
         }
+      }).then(res=>{
+        console.log(res.data)
+      }).catch(err=>{
+        console.log(err)
       })
-    }catch(err){
-      console.log(err)
-    }
-    
     push('/')
   }
   return (
