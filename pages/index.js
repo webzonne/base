@@ -1,10 +1,12 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import axios from 'axios'
+import FileBase from "react-file-base64";
 export default function Home() {
 
   const initial={
-    nombre:''
+    nombre:'',
+    image:''
   }
   const [data,setdata]=useState(initial)
 
@@ -14,10 +16,11 @@ export default function Home() {
     const {name, value} = e.target
     setdata({...data, [name]:value})
   }
+  const handleFileChange = (file)=>{
+    setdata({...data, image:file.base64})
+  }
   const submit = (e)=>{
     e.preventDefault()
-    const formData = new FormData()
-    formData.append('nombre',data.nombre)
 
       axios.post('/api/hello',data,{ 
         headers: {
@@ -34,7 +37,12 @@ export default function Home() {
     <>
      <h1>HOLA MUNDO</h1>
     <form onSubmit={submit}>
-        <input onChange={handleChange} type='text' name='nombre'/>
+        <input onChange={handleChange} type='text' name='nombre'/><br/><br/>
+        <FileBase
+            type="file"
+            multiple={false}
+            onDone={handleFileChange}
+          /><br/><br/>
         <button type='submit'>ENVIAR</button>
     </form>
     </>
