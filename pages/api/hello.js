@@ -3,3 +3,9 @@
 export default function handler(req, res) {
   res.status(200).json({ name: 'John Doe' })
 }
+
+export const config = {
+  api: {
+    bodyParser: false, // Disallow body parsing, consume as stream
+  },
+};
