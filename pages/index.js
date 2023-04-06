@@ -19,9 +19,9 @@ export default function Home() {
     const formData = new FormData()
     formData.append('nombre',data.nombre)
 
-      axios.post('/api/hello',formData,{ 
+      axios.post('/api/hello',data,{ 
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'application/json'
         }
       }).then(res=>{
         console.log(res.data)
